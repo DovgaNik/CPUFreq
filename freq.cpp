@@ -2,16 +2,16 @@
 #include <fstream>
 
 #define GLYPH ""
+#define DELIMITER ":"
 
 using namespace std;
 
 int main() {
 	
-	string file, temp;
-	string delimiter = ":";
+	string file,
+	       temp;
+
 	ifstream inputFileStream("/proc/cpuinfo");
-
-
 
 	int count = 0, 
 	    sum = 0;
@@ -20,7 +20,7 @@ int main() {
 		
 		file = file + "\n" + temp;
 
-		string token = temp.substr(0, temp.find(delimiter));
+		string token = temp.substr(0, temp.find(DELIMITER));
 		if (token == "cpu MHz		"){
 			
 			string Hz = temp.substr(11, 4);
@@ -34,9 +34,12 @@ int main() {
 
 	inputFileStream.close(); 
 
-	int averageHz = sum / count;
+	cout << "sum is " << sum << endl;
+	cout << "count is " << count << endl;
 
-	cout << GLYPH << " " << averageHz << endl; 
+	int averageHz = (sum / count);
+
+	cout << "The average frequency among the cores is " << averageHz / 1000 << "Hz" << endl; 
 
 	return(0);
 
