@@ -3,36 +3,35 @@
 
 #define GLYPH ""
 #define DELIMITER ":"
+#define FILE_PATH "/proc/cpuinfo"
+
 
 using namespace std;
 
 int main() {
 	
-	string file,
-	       temp;
+	ifstream inputFileStream(FILE_PATH); //Opening a filestream
 
-	ifstream inputFileStream("/proc/cpuinfo");
+	int count = 0,	//|Declaring vars that wiil containg the raw sum of Hz from all cpu cores 
+	    sum = 0;	//|
 
-	int count = 0, 
-	    sum = 0;
+	string temp; //A temporary buffer for a loop that will read and process the file
 
-	while (getline (inputFileStream, temp)) {
+	while (getline (inputFileStream, temp)) { //Reading the file line by line
 		
-		file = file + "\n" + temp;
-
-		string token = temp.substr(0, temp.find(DELIMITER));
-		if (token == "cpu MHz		"){
+		string token = temp.substr(0, temp.find(DELIMITER));	//|Separating a token at the beggining of each line
+		if (token == "cpu MHz		"){			//|and determining if it is the line that we need in our case
 			
-			string Hz = temp.substr(11, 4);
-			int hz = stoi(Hz);
+			string Hz = temp.substr(11, 4); //Getting the frequency itself
+			int hz = stoi(Hz); //Converting a number (e.g. 1234) in string variable to an integer
 
-			sum = sum + hz;
-			count++;
+			sum = sum + hz; //Summing all the hz in cores
+			count++; //Counting the amount of cores
 		}
 
 	}
 
-	inputFileStream.close(); 
+	inputFileStream.close(); //Closing filestream
 
 	cout << "sum is " << sum << endl;
 	cout << "count is " << count << endl;
