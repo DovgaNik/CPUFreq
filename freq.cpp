@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 
+#define GLYPH ""
+
 using namespace std;
 
 int main() {
@@ -8,6 +10,8 @@ int main() {
 	string file, temp;
 	string delimiter = ":";
 	ifstream inputFileStream("/proc/cpuinfo");
+
+
 
 	int count = 0, 
 	    sum = 0;
@@ -28,9 +32,11 @@ int main() {
 
 	}
 
-	cout << sum / count;	
-
 	inputFileStream.close(); 
+
+	int averageHz = sum / count;
+
+	cout << GLYPH << " " << averageHz << endl; 
 
 	return(0);
 
