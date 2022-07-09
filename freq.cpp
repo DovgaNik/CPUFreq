@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <chrono>
+#include <thread>
 
 #define GLYPH ""
 #define DELIMITER ":"
@@ -8,7 +10,7 @@
 
 using namespace std;
 
-int main() {
+void get() {
 	
 	ifstream inputFileStream(FILE_PATH); //Opening a filestream
 
@@ -38,6 +40,19 @@ int main() {
 	double averageHz = sum / count;
 	cout << "The average frequency among the cores is " << averageHz / 1000 << "GHz" << endl; 
 
-	return(0);
+}
+
+int main() {
+
+	while(true) {
+		
+		using namespace std::this_thread;
+		using namespace std::chrono;
+		get();
+		sleep_for(nanoseconds(10));
+		sleep_until(system_clock::now() + seconds(1));	
+
+	}
+	return 0;
 
 }
