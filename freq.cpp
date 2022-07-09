@@ -23,7 +23,9 @@ int main() {
 		if (token == "cpu MHz		"){			//|and determining if it is the line that we need in our case
 			
 			string Hz = temp.substr(11, 4); //Getting the frequency itself
-			int hz = stoi(Hz); //Converting a number (e.g. 1234) in string variable to an integer
+			double hz = stoi(Hz); //Converting a number (e.g. 1234) in string variable to an integer
+			
+			cout << "Core " << count << " is " << hz / 1000 << " GHz" << endl;
 
 			sum = sum + hz; //Summing all the hz in cores
 			count++; //Counting the amount of cores
@@ -33,12 +35,8 @@ int main() {
 
 	inputFileStream.close(); //Closing filestream
 
-	cout << "sum is " << sum << endl;
-	cout << "count is " << count << endl;
-
-	int averageHz = (sum / count);
-
-	cout << "The average frequency among the cores is " << averageHz / 1000 << "Hz" << endl; 
+	double averageHz = sum / count;
+	cout << "The average frequency among the cores is " << averageHz / 1000 << "GHz" << endl; 
 
 	return(0);
 
