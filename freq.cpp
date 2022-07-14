@@ -45,7 +45,7 @@ void get() {
 			string Hz = temp.substr(11, 4); //Getting the frequency itself
 			int hz = stoi(Hz); //Converting a number (e.g. 1234) in string variable to an integer
 			
-			cout << "Core " << count << " is " << hz / 1000 << " GHz" << endl;
+			cout << "Core " << count << " is " << stof(Hz) / 1000 << " GHz" << endl;
 
 			sum = sum + hz; //Summing all the hz in cores
 			count++; //Counting the amount of cores
@@ -55,7 +55,7 @@ void get() {
 
 	inputFileStream.close(); //Closing filestream
 
-	int averageHz = sum / count;
+	double averageHz = sum / count;
 	cout << "The average frequency among the cores is " << averageHz / 1000 << "GHz" << endl; 
 
 }
