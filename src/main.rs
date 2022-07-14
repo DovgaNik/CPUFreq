@@ -10,4 +10,11 @@ fn main() {
     let file = File::open(FILE_PATH).unwrap();
     let reader = BufReader::new(file);
 
+    for (index, line) in reader.lines().enumerate() {
+        let line = line.unwrap();
+        
+        println!("{}", line);
+    }
+
+
 }
