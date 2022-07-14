@@ -21,7 +21,7 @@ fn main() {
             average.0 = average.0 + 1;
             average.1 = average.1 + split[1].trim().parse::<f32>().unwrap();
 
-            let temp = split[1].trim().parse::<f32>().unwrap();
+            //let temp = split[1].trim().parse::<f32>().unwrap();
 
         }
 	}
