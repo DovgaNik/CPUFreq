@@ -1,21 +1,39 @@
 #include <iostream>
 #include <fstream>
-#include <chrono>
-#include <thread>
+//#include <chrono>
+//#include <thread>
 
-#define GLYPH ""
 #define DELIMITER ":"
 #define FILE_PATH "/proc/cpuinfo"
 
 
 using namespace std;
 
+void get();
+
+int main() {
+
+	get();
+
+//	while(true) {
+//		
+//		using namespace std::this_thread;
+//		using namespace std::chrono;
+//		get();
+//		sleep_for(nanoseconds(10));
+//		sleep_until(system_clock::now() + seconds(1));	
+
+//	}
+	return 0;
+
+}
+
 void get() {
 	
 	ifstream inputFileStream(FILE_PATH); //Opening a filestream
 
-	int count = 0,	//|Declaring vars that wiil containg the raw sum of Hz from all cpu cores 
-	    sum = 0;	//|
+	int count = 0;	//|Declaring vars that wiil containg the raw sum of Hz from all cpu cores 
+	int sum = 0;	//|
 
 	string temp; //A temporary buffer for a loop that will read and process the file
 
@@ -25,7 +43,7 @@ void get() {
 		if (token == "cpu MHz		"){			//|and determining if it is the line that we need in our case
 			
 			string Hz = temp.substr(11, 4); //Getting the frequency itself
-			double hz = stoi(Hz); //Converting a number (e.g. 1234) in string variable to an integer
+			int hz = stoi(Hz); //Converting a number (e.g. 1234) in string variable to an integer
 			
 			cout << "Core " << count << " is " << hz / 1000 << " GHz" << endl;
 
@@ -37,22 +55,7 @@ void get() {
 
 	inputFileStream.close(); //Closing filestream
 
-	double averageHz = sum / count;
+	int averageHz = sum / count;
 	cout << "The average frequency among the cores is " << averageHz / 1000 << "GHz" << endl; 
-
-}
-
-int main() {
-
-	while(true) {
-		
-		using namespace std::this_thread;
-		using namespace std::chrono;
-		get();
-		sleep_for(nanoseconds(10));
-		sleep_until(system_clock::now() + seconds(1));	
-
-	}
-	return 0;
 
 }
